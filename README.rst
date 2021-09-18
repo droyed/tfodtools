@@ -55,7 +55,7 @@ This will create `model.json` and `shard` files :
     └── model.json
 
 
-`Setup mobile inference <https://github.com/droyed/datatools/blob/main/docs/source/tfod_setup_imgs_xmls.md>`_ discusses a setup workflow on using these files for a mobile based inferencing.
+`Setup mobile inference <https://github.com/droyed/tfodtools/blob/main/docs/source/setup_mobile_inference.md>`_ discusses a setup workflow on using these files for a mobile based inferencing.
 
 **Note :** For now, this workflow works as a single class/object detection solution.
 
