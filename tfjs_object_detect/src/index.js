@@ -5,6 +5,7 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 import "./styles.css";
 tf.setBackend('webgl');
 
+// ------------- Edit section ---------------
 const DEBUG_PREDICTIONS = true; // edit
 
 const threshold = 0.75; // edit (optional)
@@ -12,13 +13,14 @@ const threshold = 0.75; // edit (optional)
 const feature_label = "" // edit
 
 const model_json_path = "" // edit
-//"http://127.0.0.1:8080/model.json"
-//"https://raw.githubusercontent.com/[user]/[repo]/model.json"
+//"http://127.0.0.1:8080/model.json" : Option-1 : local host for local testing
+//"https://raw.githubusercontent.com/[user]/[repo]/model.json" : Option-2 : github host for public domains
 
 // Set after debugging on predictions
-const pred_boxes_ID   = []; // edit
-const pred_scores_ID  = []; // edit
-const pred_classes_ID = []; // edit
+const pred_boxes_ID   = 0; // edit
+const pred_scores_ID  = 1; // edit
+const pred_classes_ID = 2; // edit
+// ------------- Edit section ---------------
 
 async function load_model() {
     const model = await loadGraphModel(model_json_path);

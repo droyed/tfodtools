@@ -21,27 +21,25 @@ We need to host the converted model somewhere and link it in `src/index.js`. We 
 - Github hosting :  Upload all the files in `web_model` onto a github repo and link up the raw github link of `model.json`. This way, model would be accessible on public domains. The link would be something like - `https://raw.githubusercontent.com/[repo]/model.json`.
 
 **Step #1 : ** Setup `model` and feature-label
-So, edit `const model = await loadGraphModel ...` -
+
+
+Look in `src/index.js`, for `Edit section` that needs edits.
+
+- Set `model_json_path` to point to the path that holds `model.json`, like so -
+
 
 ```javascript
-async function load_model() {
-	// Option-1 : local host for local testing
-	const model = await loadGraphModel("http://127.0.0.1:8080/model.json");
-	
-	// Option-2 : github host for public domains
-    const model = await loadGraphModel("https://raw.githubusercontent.com/[repo]/model.json");
-    return model;
-```
+// Option-1 : local host for local testing (won't work on public url)
+const model_json_path = "http://127.0.0.1:8080/model.json"
 
-b. Edit `name` to the feature label in use (e.g. `FT` is the feature here) -
-```javascript
-let classesDir = {
-    1: {
-        name: 'FT',
-        id: 1,
-    }
-}
-```
+// or ..
+
+// Option-2 : github host for public domains
+const model_json_path = "https://raw.githubusercontent.com/[repo]/model.json"
+````
+
+- Set `feature_label` to the feature label in use.
+
 Note again, that for now this setup only works with one-class training.
 
 **Step #2 : ** Setup IDs for `boxes`, `scores` and `classID` in `src/index.js`
