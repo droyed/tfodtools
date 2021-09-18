@@ -1,7 +1,7 @@
 Tensorflow Object Detection Tools
 =================================
 
-|Py-Versions| |OS| |License|
+|Py-Versions| |Bash-Version| |OS| |License|
 
 This repository is conceived with the idea of simplifying `tensorflow objection detection workflow <https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html>`_ to minimize the hassles of setting up various components and maximizing automation between them. It also extends to incoporate a mobile-based inferencing of the trained models. Thus, this could work as an `end-to-end toolkit` solution for a tensorflow based objection detection project.
 
@@ -62,6 +62,9 @@ This will create `model.json` and `shard` files :
 
 
 .. |Py-Versions| image:: https://img.shields.io/badge/Python-3.6+-blue
+   :target: https://github.com/droyed/tfodtools
+
+.. |Bash-Version| image:: https://img.shields.io/badge/Bash-4.2+-green
    :target: https://github.com/droyed/tfodtools
 
 .. |OS| image:: https://img.shields.io/badge/Platform-%E2%98%AFLinux-9cf
