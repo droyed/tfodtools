@@ -5,10 +5,9 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 import "./styles.css";
 tf.setBackend('webgl');
 
+const threshold = 0.75; // edit (optional)
 // ------------- Edit section ---------------
 const DEBUG_PREDICTIONS = true; // edit
-
-const threshold = 0.75; // edit (optional)
 
 const feature_label = "" // edit
 
