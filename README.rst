@@ -3,7 +3,7 @@ Tensorflow Object Detection Tools
 
 |Py-Versions| |OS| |License|
 
-This repository is conceived with the idea of simplifying [`tensorflow objection detection workflow`](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html) to minimize the hassles of setting up various components and maximizing automation between them. It also extends to incoporate a mobile-based inferencing of the trained models. Thus, this could work as an `end-to-end toolkit` solution for a tensorflow based objection detection project.
+This repository is conceived with the idea of simplifying `tensorflow objection detection workflow` <https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html>`_ to minimize the hassles of setting up various components and maximizing automation between them. It also extends to incoporate a mobile-based inferencing of the trained models. Thus, this could work as an `end-to-end toolkit` solution for a tensorflow based objection detection project.
 
 Steps
 -----
