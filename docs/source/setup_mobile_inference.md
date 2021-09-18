@@ -20,7 +20,7 @@ We need to host the converted model somewhere and link it in `src/index.js`. We 
 - Local : cd to `web_model` and run `http-server -c1 --cors .` Thus, model would be available at `http://127.0.0.1:8080`. This a good choice when you want to keep the model weights in a safe place and control who can request inferences to it. Downside is, if you are using a public domain like `ngrok`, the model won't be accessible.
 - Github hosting :  Upload all the files in `web_model` onto a github repo and link up the raw github link of `model.json`. This way, model would be accessible on public domains. The link would be something like - `https://raw.githubusercontent.com/[repo]/model.json`.
 
-**Step #1 : ** Setup `model` and feature-label
+**Step #1 :** Setup `model` and feature-label
 
 
 Look in `src/index.js`, for `Edit section` that needs edits.
@@ -40,7 +40,7 @@ const model_json_path = "https://raw.githubusercontent.com/[repo]/model.json"
 
 Note again, that for now this setup only works with one-class training.
 
-**Step #2 : ** Setup IDs for `boxes`, `scores` and `classID` in `src/index.js`
+**Step #2 :** Setup IDs for `boxes`, `scores` and `classID` in `src/index.js`
 
 Edit `src/index.js` :
 
