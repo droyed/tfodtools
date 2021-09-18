@@ -104,7 +104,7 @@ Predictions[7] index.js:126
 ```
 Hence, `ID = 7`.
 
-Once, we have the IDs, edit `src/index.js` with those :
+Edit `src/index.js` with those IDs :
 
 ```javascript
 const DEBUG_PREDICTIONS = false;
