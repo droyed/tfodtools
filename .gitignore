@@ -1,0 +1,15 @@
+
+# Sphinx documentation
+docs/build/
+build/
+dist/
+*.egg-info/
+
+# Python compiled files
+*.pyc
+
+# Python files that store text content, specifically paths that were created during local python setup installation
+*.pyt
+
+# history files
+*.Rhistory
