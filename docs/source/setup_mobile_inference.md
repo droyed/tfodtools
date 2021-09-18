@@ -32,8 +32,6 @@ Look in `src/index.js`, for `Edit section` that needs edits.
 // Option-1 : local host for local testing (won't work on public url)
 const model_json_path = "http://127.0.0.1:8080/model.json"
 
-// or ..
-
 // Option-2 : github host for public domains
 const model_json_path = "https://raw.githubusercontent.com/[repo]/model.json"
 ````
