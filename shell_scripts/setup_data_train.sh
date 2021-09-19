@@ -24,7 +24,11 @@ if [ -f "$CONFIG_FILE" ]; then
     else
         read -p "Enter python virtual environment path : "  ENV_PATH  
     fi
-
+else
+    echo "Sample tensorflow path :"
+    cat sample_tensorflow_path.txt
+    read -p "Enter tensorflow object detection path (ending in /Tensorflow) : "  TF_INSTALL_PATH
+    read -p "Enter python virtual environment path : "  ENV_PATH
 fi
 
 source $ENV_PATH"/bin/activate"
@@ -46,12 +50,22 @@ cd ../../
 read -p "Enter path of images and xmls : "  indir  
 indir=$(realpath $indir)
 
-read -p "Enter feature label : "  feature_name
+## Setup feature labels into label_map.pbtxt
+read -p "Enter feature labels (separated by space) : "  labels
+rm -f workspace/training_demo/annotations/label_map.pbtxt
+
+counter=1
+for label in $labels
+do
 echo "
 item {
-    id: 1
-    name: '$feature_name'
-}" > workspace/training_demo/annotations/label_map.pbtxt
+    id: $counter
+    name: '$label'
+}" >> workspace/training_demo/annotations/label_map.pbtxt
+counter=$((counter+1))
+done
+count_labels=$((counter-1))
+echo "count_labels = ""$count_labels"
 
 python scripts/preprocessing/partition_dataset.py -x -i "$indir" -r 0.1 -o workspace/training_demo/images/
 python scripts/preprocessing/generate_tfrecord.py -x workspace/training_demo/images/train -l workspace/training_demo/annotations/label_map.pbtxt -o workspace/training_demo/annotations/train.record
@@ -71,9 +85,11 @@ mkdir -p ../models/my_model
 
 cp "$model_extracteddir"/pipeline.config ../models/my_model/
 
-python ../../../scripts/preprocessing/edit_pipeline.py ../models/my_model/pipeline.config "$model_extracteddir"
+pipeline_config=$(dirname $PWD)"/models/my_model/pipeline.config"
 
-echo "pipeline config file edited - "$PWD"/pipeline.config" 
+python ../../../scripts/preprocessing/edit_pipeline.py "$pipeline_config" "$model_extracteddir" "$count_labels"
+
+echo "pipeline config file edited - ""$pipeline_config"
 read -p "Please edit further if needed and press return when ready, any other to quit here : "  choice
 if [ "$choice" != '' ]; then
     exit 1

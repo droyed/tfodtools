@@ -9,9 +9,9 @@ const threshold = 0.75; // edit (optional)
 // ------------- Edit section ---------------
 const DEBUG_PREDICTIONS = true; // edit
 
-const feature_label = "" // edit
+let classesDirS = {1:'[FT1]', 2:'[FT2]'}; // edit to feature labels
 
-const model_json_path = "" // edit
+const model_json_path = ""
 //"http://127.0.0.1:8080/model.json" : Option-1 : local host for local testing
 //"https://raw.githubusercontent.com/[user]/[repo]/model.json" : Option-2 : github host for public domains
 
@@ -21,18 +21,13 @@ const pred_scores_ID  = 1; // edit
 const pred_classes_ID = 2; // edit
 // ------------- Edit section ---------------
 
+
 async function load_model() {
     const model = await loadGraphModel(model_json_path);
     console.log('Model loaded!')
     return model;
   }
 
-let classesDir = {
-    1: {
-        name: feature_label,
-        id: 1,
-    }
-}
 
 class App extends React.Component {
   videoRef = React.createRef();
@@ -86,29 +81,29 @@ class App extends React.Component {
     return expandedimg;
   };
 
-  buildDetectedObjects(scores, threshold, boxes, classes, classesDir) {
+  buildDetectedObjects(scores, threshold, boxes, classes, classesDirS) {
     const detectionObjects = []
     var video_frame = document.getElementById('frame');
 
-    const i = 0;
-    const score = scores[0][0];
-    if (score > threshold) {
-      const bbox = [];
-      const minY = boxes[0][i][0] * video_frame.offsetHeight;
-      const minX = boxes[0][i][1] * video_frame.offsetWidth;
-      const maxY = boxes[0][i][2] * video_frame.offsetHeight;
-      const maxX = boxes[0][i][3] * video_frame.offsetWidth;
-      bbox[0] = minX;
-      bbox[1] = minY;
-      bbox[2] = maxX - minX;
-      bbox[3] = maxY - minY;
-      detectionObjects.push({
-        class: classes[i],
-        label: classesDir[classes[i]].name,
-        score: score.toFixed(4),
-        bbox: bbox
-      })
+    scores[0].forEach((score, i) => {
+      if (score > threshold) {
+        const bbox = [];
+        const minY = boxes[0][i][0] * video_frame.offsetHeight;
+        const minX = boxes[0][i][1] * video_frame.offsetWidth;
+        const maxY = boxes[0][i][2] * video_frame.offsetHeight;
+        const maxX = boxes[0][i][3] * video_frame.offsetWidth;
+        bbox[0] = minX;
+        bbox[1] = minY;
+        bbox[2] = maxX - minX;
+        bbox[3] = maxY - minY;
+        detectionObjects.push({
+          class: classes[i],
+          label: classesDirS[classes[i]],
+          score: score.toFixed(4),
+          bbox: bbox
+        })
       }
+    })
     return detectionObjects
   }
 
@@ -136,7 +131,7 @@ class App extends React.Component {
     const classes = predictions[pred_classes_ID].dataSync();
 
     const detections = this.buildDetectedObjects(scores, threshold,
-                                    boxes, classes, classesDir);
+                                    boxes, classes, classesDirS);
 
     detections.forEach(item => {
       const x = item['bbox'][0];

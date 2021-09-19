@@ -22,7 +22,6 @@ We need to host the converted model somewhere and link it in `src/index.js`. We 
 
 **Step #1 :** Setup `model` and feature-label
 
-
 Look in `src/index.js`, for `Edit section` that needs edits.
 
 - Set `model_json_path` to point to the path that holds `model.json`, like so -
@@ -36,9 +35,12 @@ const model_json_path = "http://127.0.0.1:8080/model.json"
 const model_json_path = "https://raw.githubusercontent.com/[repo]/model.json"
 ````
 
-- Set `feature_label` to the feature label in use.
+- Set `classesDirS` to set feature labels and IDs in use. This has to match the syntax in  `pipeline.config` that was used while training.
 
-Note again, that for now this setup only works with one-class training.
+So, for a two-class solution with IDs as `cat` and `dog` and their IDs as respectively `1` and `2`, we would have :
+```javascript
+let classesDirS = {1:'cat', 2:'dog'};
+```
 
 **Step #2 :** Setup IDs for `boxes`, `scores` and `classID` in `src/index.js`
 
@@ -97,7 +99,7 @@ Predictions[4] index.js:126
 ```
 Hence, `ID = 4`.
 
-(3) classes ID : We are looking for an int value. Since, we are working with one-class solution, so look for `1` -
+(3) classes ID : We are looking for an int value. So, look for `1` or `2` or so on -
 ```
 Predictions[7] index.js:126
 1

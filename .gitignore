@@ -13,3 +13,6 @@ dist/
 
 # history files
 *.Rhistory
+
+# obsidian setting files
+*.obsidian

@@ -15,8 +15,8 @@ def write_config(pipeline, pipeline_config_filepath):
     with tf.io.gfile.GFile(pipeline_config_filepath, "wb") as f:                                                                                                                                                                                                                       
         f.write(config_text)
 
-def modify_config(pipeline, pretrained_model_name):
-    pipeline.model.ssd.num_classes = 1
+def modify_config(pipeline, pretrained_model_name, num_classes):
+    pipeline.model.ssd.num_classes = num_classes
     pipeline.train_config.fine_tune_checkpoint_type = 'detection'
 
     pipeline.train_config.fine_tune_checkpoint = 'pre-trained-models/' + pretrained_model_name + '/checkpoint/ckpt-0'
@@ -32,20 +32,24 @@ def modify_config(pipeline, pretrained_model_name):
     return pipeline
 
 
-def setup_pipeline(pipeline_config_filepath, pretrained_model_name):
+def setup_pipeline(pipeline_config_filepath, pretrained_model_name, num_classes):
     pipeline = read_config(pipeline_config_filepath)
-    pipeline = modify_config(pipeline, pretrained_model_name)
+    pipeline = modify_config(pipeline, pretrained_model_name, num_classes)
     write_config(pipeline, pipeline_config_filepath)
 
+print('--> Debugging inside edit_pipeline ...')
 numargs = len(sys.argv)
-print('numargs : '+str(numargs))
-if numargs<3:
-    raise Exception('Add in the pipeline config filepath and pre-trained model name as the arguments.')
+if numargs<4:
+    raise Exception('Add in the pipeline config filepath, pre-trained model name and number of classes as the arguments.')
 
 pipeline_config_fpath = sys.argv[1]
-print('pipeline filepath : ' + pipeline_config_fpath)
+print('    pipeline filepath : ' + pipeline_config_fpath)
 
 pretrained_model_name = sys.argv[2]
-print('pipeline pretrained_model_name : ' + pretrained_model_name)
+print('    pipeline pretrained_model_name : ' + pretrained_model_name)
 
-setup_pipeline(pipeline_config_fpath, pretrained_model_name)
+num_classes = int(sys.argv[3])
+print('    num_classes : ' + str(num_classes))
+
+setup_pipeline(pipeline_config_fpath, pretrained_model_name, num_classes)
+print('--> Done.')
