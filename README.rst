@@ -57,9 +57,6 @@ This will create `model.json` and `shard` files :
 
 `Setup mobile inference <https://github.com/droyed/tfodtools/blob/main/docs/source/setup_mobile_inference.md>`_ discusses a setup workflow on using these files for a mobile based inferencing.
 
-**Note :** For now, this workflow works as a single class/object detection solution.
-
-
 
 .. |Py-Versions| image:: https://img.shields.io/badge/Python-3.6+-blue
    :target: https://github.com/droyed/tfodtools
